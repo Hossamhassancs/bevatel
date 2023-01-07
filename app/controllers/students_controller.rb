@@ -1,4 +1,5 @@
 class StudentsController < ApplicationController
+  #before_action :authorize_request, except: :create
   before_action :set_school
   before_action :set_school_student, only: [:show, :update, :destroy]
 
@@ -29,7 +30,7 @@ class StudentsController < ApplicationController
   private
 
   def student_params
-    params.permit(:name)
+    params.permit(:name, :email , :password)
   end
 
   def set_school

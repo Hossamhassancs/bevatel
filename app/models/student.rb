@@ -1,9 +1,20 @@
 class Student < ApplicationRecord
 
   acts_as_paranoid
+  has_secure_password
 
+  #validations
+  validates :email, presence: true, uniqueness: true
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :name, presence: true, uniqueness: true
+  validates :password,
+            length: { minimum: 6 },
+            if: -> { new_record? || !password.nil? }
+
+  #relations
   belongs_to :school
-  validates_presence_of :name 
+
+  #callbacks
   after_create :set_order
 
 
@@ -22,7 +33,6 @@ class Student < ApplicationRecord
       new_order = student.order - 1
       student.update(order: new_order)
     end
-
     TaskConfirmationMailer.task_confirmation_email.deliver_now
   end
   

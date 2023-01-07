@@ -41,7 +41,7 @@ RSpec.describe "Students", type: :request do
 
   # Test suite for PUT /schools/:school_id/students
   describe 'POST /schools/:school_id/students' do
-    let(:valid_attributes) { { name: 'Visit Narnia' } }
+    let(:valid_attributes) { { name: 'Visit Narnia' , email: "narian@gmail.com" , password: "12345678" } }
 
     context 'when request attributes are valid' do
       before { post "/schools/#{school_id}/students", params: valid_attributes }
