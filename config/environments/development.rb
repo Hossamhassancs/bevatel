@@ -1,5 +1,7 @@
 require "active_support/core_ext/integer/time"
 
+
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -32,6 +34,22 @@ Rails.application.configure do
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
+
+  config.action_mailer.delivery_method = :test
+  config.action_mailer.default_url_options = { 
+    :host => 'localhost:3000', 
+    :protocol => 'http'
+  }
+
+  config.action_mailer.smtp_settings = {
+    :address => 'smtp.gmail.com',
+    :port => 601,
+    :user_name => "hossamhassan.csd@gmail.com",
+    :password => "aaaaaa",
+    :authentication => 'plain',
+    :enable_starttls_auto => true
+  }
+
 
   config.action_mailer.perform_caching = false
 
