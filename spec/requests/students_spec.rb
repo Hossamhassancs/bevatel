@@ -77,7 +77,7 @@ RSpec.describe "Students", type: :request do
     it 'returns status code 204' do
       expect(response).to have_http_status(204)
     end
-byebug
+    
     it 'reorder the students' do
       expect(students[2].order).to eql(1)
     end
