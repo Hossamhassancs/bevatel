@@ -4,7 +4,7 @@ RSpec.describe "Students", type: :request do
   
   # Initialize the test data
   let!(:school) { create(:school) }
-  let!(:students) { create_list(:student, 2, school_id: school.id) }
+  let!(:students) { create_list(:student, 3, school_id: school.id) }
   let(:school_id) { school.id }
   let(:id) { students.first.id }
 
@@ -18,7 +18,7 @@ RSpec.describe "Students", type: :request do
       end
 
       it 'returns all school students' do
-        expect(JSON.parse(response.body).size).to eq(2)
+        expect(JSON.parse(response.body).size).to eq(3)
       end
     end
 
@@ -73,9 +73,14 @@ RSpec.describe "Students", type: :request do
   # Test suite for DELETE /schools/:id
   describe 'DELETE /schools/:id' do
     before { delete "/schools/#{school_id}/students/#{id}" }
-
+    
     it 'returns status code 204' do
       expect(response).to have_http_status(204)
     end
+byebug
+    it 'reorder the students' do
+      expect(students[2].order).to eql(1)
+    end
+
   end
 end

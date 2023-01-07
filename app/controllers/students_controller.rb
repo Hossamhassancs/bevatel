@@ -21,6 +21,7 @@ class StudentsController < ApplicationController
   end
 
   def destroy
+    Student.reorder(@school , @student)
     @student.destroy
     head :no_content
   end
