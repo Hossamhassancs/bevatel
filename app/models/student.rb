@@ -14,7 +14,6 @@ class Student < ApplicationRecord
   end
 
   def self.reorder(school, student)
-    byebug
     id = student.id
     students_to_edit_order = school.students.where("id > ?" , id)
 
